@@ -1,0 +1,454 @@
+suWelcome to Ubuntu 24.04.1 LTS (GNU/Linux 5.15.167.4-microsoft-standard-WSL2 x86_64)
+
+ * Documentation:  https://help.ubuntu.com
+ * Management:     https://landscape.canonical.com
+ * Support:        https://ubuntu.com/pro
+
+ System information as of Thu Aug 14 01:33:51 UTC 2025
+
+  System load:  1.04                Processes:             96
+  Usage of /:   0.5% of 1006.85GB   Users logged in:       0
+  Memory usage: 11%                 IPv4 address for eth0: 172.17.221.134
+  Swap usage:   0%
+
+ * Strictly confined Kubernetes makes edge and IoT secure. Learn how MicroK8s
+   just raised the bar for easy, resilient and secure K8s cluster deployment.
+
+   https://ubuntu.com/engage/secure-kubernetes-at-the-edge
+
+This message is shown once a day. To disable it please create the
+/home/dheeraj/.hushlogin file.
+dheeraj@LAPTOP-9LAJ583D:~$ sudo mysql
+[sudo] password for dheeraj:
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 8
+Server version: 8.0.43-0ubuntu0.24.04.1 (Ubuntu)
+
+Copyright (c) 2000, 2025, Oracle and/or its affiliates.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| Dheeraj            |
+| information_schema |
+| mysql              |
+| performance_schema |
+| sys                |
++--------------------+
+5 rows in set (0.01 sec)
+
+mysql> use Dheeraj;
+Database changed
+mysql> SHOW TABLES;
+Empty set (0.00 sec)
+
+mysql> CREATE TABLE employee (Name VARCHAR(10),Address VARCHAR(20),Aadharno VARCHAR(25),Mobile INT,EmailID VARCHAR(20),JoiningDate DATE,Salary INT);
+Query OK, 0 rows affected (0.08 sec)
+
+mysql> SHOW TABLES;
++-------------------+
+| Tables_in_Dheeraj |
++-------------------+
+| employee          |
++-------------------+
+1 row in set (0.00 sec)
+
+mysql> CREATE TABLE resident (Name VARCHAR(10),Address VARCHAR(20),Aadharno VARCHAR(25),Gender VARCHAR(8),Age INT,Mobile INT,EmailID VARCHAR(20));
+Query OK, 0 rows affected (0.07 sec)
+
+mysql> CREATE TABLE resident (Name VARCHAR(10),Gender VARCHAR(8),Age INT,Mobile INT,Resident VARCHAR(20));
+ERROR 1050 (42S01): Table 'resident' already exists
+mysql> CREATE TABLE companions (Name VARCHAR(10),Gender VARCHAR(8),Age INT,Mobile INT,Resident VARCHAR(20));
+Query OK, 0 rows affected (0.08 sec)
+
+mysql> CREATE TABLE rooms (RoomNumber INT,RoomType(A/C or Non A/C) VARCHAR,Capacity(Single or Double) VARCHAR(20));
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '(A/C or Non A/C) VARCHAR,Capacity(Single or Double) VARCHAR(20))' at line 1
+mysql> CREATE TABLE rooms (RoomNumber INT,RoomType[A/C or Non A/C] VARCHAR,Capacity[Single or Double] VARCHAR(20));
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '[A/C or Non A/C] VARCHAR,Capacity[Single or Double] VARCHAR(20))' at line 1
+mysql> CREATE TABLE rooms (RoomNumber INT,RoomType[AC or Non AC] VARCHAR,Capacity[Single or Double] VARCHAR(20));
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '[AC or Non AC] VARCHAR,Capacity[Single or Double] VARCHAR(20))' at line 1
+mysql> CREATE TABLE rooms (RoomNumber INT,RoomType[AC or Non AC] VARCHAR(10),Capacity[Single or Double] VARCHAR(20));
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '[AC or Non AC] VARCHAR(10),Capacity[Single or Double] VARCHAR(20))' at line 1
+mysql> CREATE TABLE rooms (RoomNumber INT,RoomType VARCHAR(10),Capacity VARCHAR(20));
+Query OK, 0 rows affected (0.08 sec)
+
+mysql> SHOW TABLES;
++-------------------+
+| Tables_in_Dheeraj |
++-------------------+
+| companions        |
+| employee          |
+| resident          |
+| rooms             |
++-------------------+
+4 rows in set (0.00 sec)
+
+mysql> CREATE TABLE bookings (BookingID INT,Name VARCHAR(15),NoOfPersons INT,RoomNumber INT,RoomType VARCHAR(10),Capacity VARCHAR(20));
+Query OK, 0 rows affected (0.08 sec)
+
+mysql> CREATE TABLE Foods (FoodItem VARCHAR(10),Type VARCHAR(15),Price INT);
+Query OK, 0 rows affected (0.13 sec)
+
+mysql> CREATE TABLE FoodOrder (OrderID INT,CustomerName VARCHAR(20),RoomNumber INT,FoodItem VARCHAR(10),Type VARCHAR(15),Price INT);
+Query OK, 0 rows affected (0.06 sec)
+
+mysql> INSERT INTO employee VALUES ('Alice', 'Mumbai', 'AADHAR123456789', 9876543210, 'alice@mail.com', '2022-01-15', 50000);
+ERROR 1264 (22003): Out of range value for column 'Mobile' at row 1
+mysql> ALTER TABLE employee
+    -> MODIFY Mobile VARCHAR(15);
+Query OK, 0 rows affected (0.19 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> DESC employee;
++-------------+-------------+------+-----+---------+-------+
+| Field       | Type        | Null | Key | Default | Extra |
++-------------+-------------+------+-----+---------+-------+
+| Name        | varchar(10) | YES  |     | NULL    |       |
+| Address     | varchar(20) | YES  |     | NULL    |       |
+| Aadharno    | varchar(25) | YES  |     | NULL    |       |
+| Mobile      | varchar(15) | YES  |     | NULL    |       |
+| EmailID     | varchar(20) | YES  |     | NULL    |       |
+| JoiningDate | date        | YES  |     | NULL    |       |
+| Salary      | int         | YES  |     | NULL    |       |
++-------------+-------------+------+-----+---------+-------+
+7 rows in set (0.01 sec)
+
+mysql> INSERT INTO employee VALUES ('Madhu', 'Mumbai', 'AADHAR123456789', 9876543210, 'madhu@gmail.com', '2022-01-15', 50000);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> INSERT INTO employee VALUES ('Babu', 'Delhi', 'AADHAR223456789', 9123456789, 'babu@gmail.com', '2021-03-20', 60000);
+Query OK, 1 row affected (0.02 sec)
+
+mysql> INSERT INTO employee VALUES ('Charlie', 'Bangalore', 'AADHAR323456789', 9988776655, 'charlie@mail.com', '2020-07-10', 55000);
+SERT INTO employee VALUES ('David', 'Hyderabad', 'AADHAR423456789', 9871234567, 'david@mail.com', '2023-05-01', 45000);
+INSERT INTO employee VALUES ('Eva', 'Chennai', 'AADHAR523456789', 9765432109, 'eva@mail.com', '2019-11-25', 70000);
+INSERT INTO employee VALUES ('Fay', 'Pune', 'AADHAR623456789', 9654321098, 'fay@mail.com', '2022-08-19', 52000);
+INSERT INTO employee VALUES ('George', 'Kolkata', 'AADHAR723456789', 9543210987, 'george@mail.com', '2021-12-01', 64000);
+INSERT INTO employee VALUES ('Helen', 'Jaipur', 'AADHAR823456789', 943210Query OK, 1 row affected (0.02 sec)
+
+mysql> INSERT INTO employee VALUES ('David', 'Hyderabad', 'AADHAR423456789', 9871234567, 'david@mail.com', '2023-05-01', 45000);
+9876, 'helen@mail.com', '2020-06-18', 58000);
+INSERT INTO employee VALUES ('Ian', 'Ahmedabad', 'AADHAR923456789', 9321098765, 'ian@mail.com', '2023-02-28', 47000);
+INSERT INTO employee VALUES ('Jane', 'Lucknow', 'AADHAR023456789', 9210987654, 'jane@mail.coQuery OK, 1 row affected (0.01 sec)
+
+mysql> INSERT INTO employee VALUES ('Eva', 'Chennai', 'AADHAR523456789', 9765432109, 'eva@mail.com', '2019-11-25', 70000);
+m', '2021-09-09', 63000);Query OK, 1 row affected (0.03 sec)
+
+mysql> INSERT INTO employee VALUES ('Fay', 'Pune', 'AADHAR623456789', 9654321098, 'fay@mail.com', '2022-08-19', 52000);
+Query OK, 1 row affected (0.02 sec)
+
+mysql> INSERT INTO employee VALUES ('George', 'Kolkata', 'AADHAR723456789', 9543210987, 'george@mail.com', '2021-12-01', 64000);
+Query OK, 1 row affected (0.02 sec)
+
+mysql> INSERT INTO employee VALUES ('Helen', 'Jaipur', 'AADHAR823456789', 9432109876, 'helen@mail.com', '2020-06-18', 58000);
+Query OK, 1 row affected (0.02 sec)
+
+mysql> INSERT INTO employee VALUES ('Ian', 'Ahmedabad', 'AADHAR923456789', 9321098765, 'ian@mail.com', '2023-02-28', 47000);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> INSERT INTO employee VALUES ('Jane', 'Lucknow', 'AADHAR023456789', 9210987654, 'jane@mail.com', '2021-09-09', 63000);
+Query OK, 1 row affected (0.02 sec)
+
+mysql> INSERT INTO employee VALUES ('Jane', 'Lucknow', 'AADHAR023456789', 9210987654, 'jane@mail.com', '2021-09-09', 63000);
+Query OK, 1 row affected (0.02 sec)
+
+mysql> DROP TABLE employee;
+Query OK, 0 rows affected (0.07 sec)
+
+mysql> DESC employee
+    -> ;
+ERROR 1146 (42S02): Table 'Dheeraj.employee' doesn't exist
+mysql> CREATE TABLE employee (Name VARCHAR(10),Address VARCHAR(20),Aadharno VARCHAR(25),Mobile INT,EmailID VARCHAR(20),JoiningDate DATE,Salary INT);
+Query OK, 0 rows affected (0.11 sec)
+
+mysql> INSERT INTO employee VALUES ('Amit', 'Mumbai', 'AADHAR100000001', '9876543210', 'amit@gmail.com', '2022-01-15', 50000);
+UES ('Priya', 'DERROR 1264 (22003): Out of range value for column 'Mobile' at row 1
+mysql> INSERT INTO employee VALUES ('Priya', 'Delhi', 'AADHAR100000002', '9123456789', 'priya@gmail.com', '2021-03-20', 60000);
+ERROR 1264 (22003): Out of range value for column 'Mobile' at row 1
+e', 'AADHAR10000mysql> INSERT INTO employee VALUES ('Rahul', 'Bangalore', 'AADHAR100000003', '9988776655', 'rahul@gmail.com', '2020-07-10', 55000);
+ERROR 1264 (22003): Out of range value for column 'Mobile' at row 1
+mysql> INSERT INTO employee VALUES ('Sneha', 'Hyderabad', 'AADHAR100000004', '9871234567', 'sneha@gmail.com', '2023-05-01', 45000);
+ERROR 1264 (22003): Out of range value for column 'Mobile' at row 1
+mysql> INSERT INTO employee VALUES ('Vikram', 'Chennai', 'AADHAR100000005', '9765432109', 'vikram@gmail.com', '2019-11-25', 70000);
+ERROR 1264 (22003): Out of range value for column 'Mobile' at row 1
+mysql> INSERT INTO employee VALUES ('Anjali', 'Pune', 'AADHAR100000006', '9654321098', 'anjali@gmail.com', '2022-08-19', 52000);
+ERROR 1264 (22003): Out of range value for column 'Mobile' at row 1
+mysql> INSERT INTO employee VALUES ('Karan', 'Kolkata', 'AADHAR100000007', '9543210987', 'karan@gmail.com', '2021-12-01', 64000);
+ERT INTO employeERROR 1264 (22003): Out of range value for column 'Mobile' at row 1
+mysql> INSERT INTO employee VALUES ('Neha', 'Jaipur', 'AADHAR100000008', '9432109876', 'neha@gmail.com', '2020-06-18', 58000);
+ERROR 1264 (22003): Out of range value for column 'Mobile' at row 1
+mysql> INSERT INTO employee VALUES ('Rohit', 'Ahmedabad', 'AADHAR100000009', '9321098765', 'rohit@gmail.com', '2023-02-28', 47000);
+ERROR 1264 (22003): Out of range value for column 'Mobile' at row 1
+mysql> INSERT INTO employee VALUES ('Pooja', 'Lucknow', 'AADHAR100000010', '9210987654', 'pooja@gmail.com', '2021-09-09', 63000);
+ERROR 1264 (22003): Out of range value for column 'Mobile' at row 1
+mysql> ALTER TABLE employee MODIFY Mobile VARCHAR(15);
+Query OK, 0 rows affected (0.14 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> INSERT INTO employee VALUES ('Amit', 'Mumbai', 'AADHAR100000001', '9876543210', 'amit@gmail.com', '2022-01-15', 50000);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> INSERT INTO employee VALUES ('Priya', 'Delhi', 'AADHAR100000002', '9123456789', 'priya@gmail.com', '2021-03-20', 60000);
+Query OK, 1 row affected (0.02 sec)
+
+mysql> INSERT INTO employee VALUES ('Rahul', 'Bangalore', 'AADHAR100000003', '9988776655', 'rahul@gmail.com', '2020-07-10', 55000);
+Query OK, 1 row affected (0.02 sec)
+
+mysql> INSERT INTO employee VALUES ('Sneha', 'Hyderabad', 'AADHAR100000004', '9871234567', 'sneha@gmail.com', '2023-05-01', 45000);
+Query OK, 1 row affected (0.03 sec)
+
+mysql> INSERT INTO employee VALUES ('Vikram', 'Chennai', 'AADHAR100000005', '9765432109', 'vikram@gmail.com', '2019-11-25', 70000);
+Query OK, 1 row affected (0.02 sec)
+
+mysql> INSERT INTO employee VALUES ('Anjali', 'Pune', 'AADHAR100000006', '9654321098', 'anjali@gmail.com', '2022-08-19', 52000);
+Query OK, 1 row affected (0.02 sec)
+
+mysql> INSERT INTO employee VALUES ('Karan', 'Kolkata', 'AADHAR100000007', '9543210987', 'karan@gmail.com', '2021-12-01', 64000);
+Query OK, 1 row affected (0.02 sec)
+
+mysql> INSERT INTO employee VALUES ('Neha', 'Jaipur', 'AADHAR100000008', '9432109876', 'neha@gmail.com', '2020-06-18', 58000);
+Query OK, 1 row affected (0.02 sec)
+
+mysql> INSERT INTO employee VALUES ('Rohit', 'Ahmedabad', 'AADHAR100000009', '9321098765', 'rohit@gmail.com', '2023-02-28', 47000);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> INSERT INTO employee VALUES ('Pooja', 'Lucknow', 'AADHAR100000010', '9210987654', 'pooja@gmail.com', '2021-09-09', 63000);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> SELECT * FROM emplyee;
+ERROR 1146 (42S02): Table 'Dheeraj.emplyee' doesn't exist
+mysql> SELECT * FROM employee;
++--------+-----------+-----------------+------------+------------------+-------------+--------+
+| Name   | Address   | Aadharno        | Mobile     | EmailID          | JoiningDate | Salary |
++--------+-----------+-----------------+------------+------------------+-------------+--------+
+| Amit   | Mumbai    | AADHAR100000001 | 9876543210 | amit@gmail.com   | 2022-01-15  |  50000 |
+| Priya  | Delhi     | AADHAR100000002 | 9123456789 | priya@gmail.com  | 2021-03-20  |  60000 |
+| Rahul  | Bangalore | AADHAR100000003 | 9988776655 | rahul@gmail.com  | 2020-07-10  |  55000 |
+| Sneha  | Hyderabad | AADHAR100000004 | 9871234567 | sneha@gmail.com  | 2023-05-01  |  45000 |
+| Vikram | Chennai   | AADHAR100000005 | 9765432109 | vikram@gmail.com | 2019-11-25  |  70000 |
+| Anjali | Pune      | AADHAR100000006 | 9654321098 | anjali@gmail.com | 2022-08-19  |  52000 |
+| Karan  | Kolkata   | AADHAR100000007 | 9543210987 | karan@gmail.com  | 2021-12-01  |  64000 |
+| Neha   | Jaipur    | AADHAR100000008 | 9432109876 | neha@gmail.com   | 2020-06-18  |  58000 |
+| Rohit  | Ahmedabad | AADHAR100000009 | 9321098765 | rohit@gmail.com  | 2023-02-28  |  47000 |
+| Pooja  | Lucknow   | AADHAR100000010 | 9210987654 | pooja@gmail.com  | 2021-09-09  |  63000 |
++--------+-----------+-----------------+------------+------------------+-------------+--------+
+10 rows in set (0.00 sec)
+
+mysql> ALTER TABLE resident
+    -> MODIFY Mobile VARCHAR(15);
+Query OK, 0 rows affected (0.19 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> INSERT INTO resident VALUES ('Amit', 'Mumbai', 'AADHAR100001', 'Male', 30, 987654321, 'amit@gmail.com');
+INTO resident VALUES ('Priya', 'Delhi', 'AADHAR100002', 'Female', 28, 912345678, 'priya@gmail.com');
+INSERT INTO resident VALUES ('Rahul', 'Bangalore', 'AADHAR100003', 'Male', 35, 998877665, 'rahul@gmail.com');
+INSERT INTO resident VALUES ('Sneha', 'Hyderabad', 'AADHAR100004', 'Female', 26, 987123456, 'sneha@gmail.com');
+INSERT INTO resident VALUES ('Vikram', 'Chennai', 'AADHAR100005', 'Male', 40, 976543210, 'vikram@gmail.com');
+INSERT INTO resident VALUES ('Anjali', 'Pune', 'AADHAR100006', 'Female', 33, 965432109, 'anjali@gmail.com');
+INSERT INTO resident VALUES ('Karan', 'Kolkata', 'AADHAR100007', 'Male', 38, 954321098, 'karan@gmail.com');
+INSERT INTO resident VALUES ('Neha', 'Jaipur', 'AADHAR100008', 'Female', 29, 943210987, 'neha@gmail.com');
+INSERT INTO resident VALUES ('Rohit', 'Ahmedabad', 'AADHAR100009', 'Male', 31, 932109876, 'rohit@gmail.com');
+INSERT INTO resident VALUES ('Pooja', 'Lucknow', 'AADHAR100010', 'Female', 27, 921098765, 'pooja@gmail.com');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> INSERT INTO resident VALUES ('Priya', 'Delhi', 'AADHAR100002', 'Female', 28, 912345678, 'priya@gmail.com');
+Query OK, 1 row affected (0.02 sec)
+
+mysql> INSERT INTO resident VALUES ('Rahul', 'Bangalore', 'AADHAR100003', 'Male', 35, 998877665, 'rahul@gmail.com');
+Query OK, 1 row affected (0.02 sec)
+
+mysql> INSERT INTO resident VALUES ('Sneha', 'Hyderabad', 'AADHAR100004', 'Female', 26, 987123456, 'sneha@gmail.com');
+Query OK, 1 row affected (0.02 sec)
+
+mysql> INSERT INTO resident VALUES ('Vikram', 'Chennai', 'AADHAR100005', 'Male', 40, 976543210, 'vikram@gmail.com');
+Query OK, 1 row affected (0.03 sec)
+
+mysql> INSERT INTO resident VALUES ('Anjali', 'Pune', 'AADHAR100006', 'Female', 33, 965432109, 'anjali@gmail.com');
+Query OK, 1 row affected (0.02 sec)
+
+mysql> INSERT INTO resident VALUES ('Karan', 'Kolkata', 'AADHAR100007', 'Male', 38, 954321098, 'karan@gmail.com');
+Query OK, 1 row affected (0.02 sec)
+
+mysql> INSERT INTO resident VALUES ('Neha', 'Jaipur', 'AADHAR100008', 'Female', 29, 943210987, 'neha@gmail.com');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> INSERT INTO resident VALUES ('Rohit', 'Ahmedabad', 'AADHAR100009', 'Male', 31, 932109876, 'rohit@gmail.com');
+Query OK, 1 row affected (0.02 sec)
+
+mysql> INSERT INTO resident VALUES ('Pooja', 'Lucknow', 'AADHAR100010', 'Female', 27, 921098765, 'pooja@gmail.com');
+Query OK, 1 row affected (0.02 sec)
+
+mysql> INSERT INTO bookings VALUES (101, 'Amit', 1, 201, 'AC', 'Single');
+ 202, 'Non-AC', 'Double');
+INSERT INTO bookings VALUES (103, 'Rahul', 1, 203, 'AC', 'Single');
+INSERT INTO bookings VALUES (104, 'Sneha', 2, 204, 'AC', 'Double');
+INSERT INTO bookings VALUES (105, 'Vikram', 1, 205, 'Non-AC', 'Single');
+INSERT INTO bookings VALUES (106, 'Anjali', 2, 206, 'AC', 'Double');
+INSERT INTO bookings VALUES (107, 'Karan', 1, 207, 'Non-AC', 'Single');
+INSERT INTO bookings VALUES (108, 'Neha', 2, 208, 'AC', 'Double');
+INSERT INTO bookings VALUES (109, 'Rohit', 1, 209, 'Non-AC', 'Single');
+INSERT INTO bookings VALUES (110, 'Pooja', 2, 210, 'AC', 'Double');
+Query OK, 1 row affected (0.02 sec)
+
+mysql> INSERT INTO bookings VALUES (102, 'Priya', 2, 202, 'Non-AC', 'Double');
+Query OK, 1 row affected (0.02 sec)
+
+mysql> INSERT INTO bookings VALUES (103, 'Rahul', 1, 203, 'AC', 'Single');
+Query OK, 1 row affected (0.02 sec)
+
+mysql> INSERT INTO bookings VALUES (104, 'Sneha', 2, 204, 'AC', 'Double');
+Query OK, 1 row affected (0.02 sec)
+
+mysql> INSERT INTO bookings VALUES (105, 'Vikram', 1, 205, 'Non-AC', 'Single');
+Query OK, 1 row affected (0.02 sec)
+
+mysql> INSERT INTO bookings VALUES (106, 'Anjali', 2, 206, 'AC', 'Double');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> INSERT INTO bookings VALUES (107, 'Karan', 1, 207, 'Non-AC', 'Single');
+Query OK, 1 row affected (0.02 sec)
+
+mysql> INSERT INTO bookings VALUES (108, 'Neha', 2, 208, 'AC', 'Double');
+Query OK, 1 row affected (0.02 sec)
+
+mysql> INSERT INTO bookings VALUES (109, 'Rohit', 1, 209, 'Non-AC', 'Single');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> INSERT INTO bookings VALUES (110, 'Pooja', 2, 210, 'AC', 'Double');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> INSERT INTO Foods VALUES ('Paneer', 'Veg', 150);
+ INTO Foods VALUES ('Fish', 'Non-Veg', 220);
+INSERT INTO Foods VALUES ('Aloo', 'Veg', 90);
+INSERT INTO Foods VALUES ('Egg', 'Non-Veg', 130);
+INSERT INTO Foods VALUES ('Rajma', 'Veg', 110);
+INSERT INTO Foods VALUES ('Prawns', 'Non-Veg', 270);
+Query OK, 1 row affected (0.02 sec)
+
+mysql> INSERT INTO Foods VALUES ('Chicken', 'Non-Veg', 200);
+Query OK, 1 row affected (0.03 sec)
+
+mysql> INSERT INTO Foods VALUES ('Dal', 'Veg', 100);
+Query OK, 1 row affected (0.02 sec)
+
+mysql> INSERT INTO Foods VALUES ('Mutton', 'Non-Veg', 250);
+Query OK, 1 row affected (0.02 sec)
+
+mysql> INSERT INTO Foods VALUES ('Chole', 'Veg', 120);
+Query OK, 1 row affected (0.03 sec)
+
+mysql> INSERT INTO Foods VALUES ('Fish', 'Non-Veg', 220);
+Query OK, 1 row affected (0.02 sec)
+
+mysql> INSERT INTO Foods VALUES ('Aloo', 'Veg', 90);
+Query OK, 1 row affected (0.02 sec)
+
+mysql> INSERT INTO Foods VALUES ('Egg', 'Non-Veg', 130);
+Query OK, 1 row affected (0.02 sec)
+
+mysql> INSERT INTO Foods VALUES ('Rajma', 'Veg', 110);
+Query OK, 1 row affected (0.02 sec)
+
+mysql> INSERT INTO Foods VALUES ('Prawns', 'Non-Veg', 270);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> INSERT INTO FoodOrder VALUES (1, 'Amit', 201, 'Paneer', 'Veg', 150);
+Order VALUES (3, 'Rahul', 203, 'Dal', 'Veg', 100);
+INSERT INTO FoodOrder VALUES (4, 'Sneha', 204, 'Mutton', 'Non-Veg', 250);
+INSERT INTO FoodOrder VALUES (5, 'Vikram', 205, 'Chole', 'Veg', 120);
+INSERT INTO FoodOrder VALUES (6, 'Anjali', 206, 'Fish', 'Non-Veg', 220);
+INSERT INTO FoodOrder VALUES (7, 'Karan', 207, 'Aloo', 'Veg', 90);
+INSERT INTO FoodOrder VALUES (8, 'Neha', 208, 'Egg', 'Non-Veg', 130);
+INSERT INTO FoodOrder VALUES (9, 'Rohit', 209, 'Rajma', 'Veg', 110);
+INSERT INTO FoodOrder VALUES (10, 'Pooja', 210, 'Prawns', 'Non-Veg', 270);
+Query OK, 1 row affected (0.02 sec)
+
+mysql> INSERT INTO FoodOrder VALUES (2, 'Priya', 202, 'Chicken', 'Non-Veg', 200);
+Query OK, 1 row affected (0.02 sec)
+
+mysql> INSERT INTO FoodOrder VALUES (3, 'Rahul', 203, 'Dal', 'Veg', 100);
+Query OK, 1 row affected (0.02 sec)
+
+mysql> INSERT INTO FoodOrder VALUES (4, 'Sneha', 204, 'Mutton', 'Non-Veg', 250);
+Query OK, 1 row affected (0.02 sec)
+
+mysql> INSERT INTO FoodOrder VALUES (5, 'Vikram', 205, 'Chole', 'Veg', 120);
+Query OK, 1 row affected (0.03 sec)
+
+mysql> INSERT INTO FoodOrder VALUES (6, 'Anjali', 206, 'Fish', 'Non-Veg', 220);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> INSERT INTO FoodOrder VALUES (7, 'Karan', 207, 'Aloo', 'Veg', 90);
+Query OK, 1 row affected (0.02 sec)
+
+mysql> INSERT INTO FoodOrder VALUES (8, 'Neha', 208, 'Egg', 'Non-Veg', 130);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> INSERT INTO FoodOrder VALUES (9, 'Rohit', 209, 'Rajma', 'Veg', 110);
+Query OK, 1 row affected (0.02 sec)
+
+mysql> INSERT INTO FoodOrder VALUES (10, 'Pooja', 210, 'Prawns', 'Non-Veg', 270);
+Query OK, 1 row affected (0.02 sec)
+
+mysql> DESC companions
+    -> ;
++----------+-------------+------+-----+---------+-------+
+| Field    | Type        | Null | Key | Default | Extra |
++----------+-------------+------+-----+---------+-------+
+| Name     | varchar(10) | YES  |     | NULL    |       |
+| Gender   | varchar(8)  | YES  |     | NULL    |       |
+| Age      | int         | YES  |     | NULL    |       |
+| Mobile   | int         | YES  |     | NULL    |       |
+| Resident | varchar(20) | YES  |     | NULL    |       |
++----------+-------------+------+-----+---------+-------+
+5 rows in set (0.00 sec)
+
+mysql> SHOW * FROM companions;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '* FROM companions' at line 1
+mysql> SELECT * FROM companions;
+Empty set (0.01 sec)
+
+mysql> SHOW * FROM employee;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '* FROM employee' at line 1
+mysql> SELECT * FROM employee;
++--------+-----------+-----------------+------------+------------------+-------------+--------+
+| Name   | Address   | Aadharno        | Mobile     | EmailID          | JoiningDate | Salary |
++--------+-----------+-----------------+------------+------------------+-------------+--------+
+| Amit   | Mumbai    | AADHAR100000001 | 9876543210 | amit@gmail.com   | 2022-01-15  |  50000 |
+| Priya  | Delhi     | AADHAR100000002 | 9123456789 | priya@gmail.com  | 2021-03-20  |  60000 |
+| Rahul  | Bangalore | AADHAR100000003 | 9988776655 | rahul@gmail.com  | 2020-07-10  |  55000 |
+| Sneha  | Hyderabad | AADHAR100000004 | 9871234567 | sneha@gmail.com  | 2023-05-01  |  45000 |
+| Vikram | Chennai   | AADHAR100000005 | 9765432109 | vikram@gmail.com | 2019-11-25  |  70000 |
+| Anjali | Pune      | AADHAR100000006 | 9654321098 | anjali@gmail.com | 2022-08-19  |  52000 |
+| Karan  | Kolkata   | AADHAR100000007 | 9543210987 | karan@gmail.com  | 2021-12-01  |  64000 |
+| Neha   | Jaipur    | AADHAR100000008 | 9432109876 | neha@gmail.com   | 2020-06-18  |  58000 |
+| Rohit  | Ahmedabad | AADHAR100000009 | 9321098765 | rohit@gmail.com  | 2023-02-28  |  47000 |
+| Pooja  | Lucknow   | AADHAR100000010 | 9210987654 | pooja@gmail.com  | 2021-09-09  |  63000 |
++--------+-----------+-----------------+------------+------------------+-------------+--------+
+10 rows in set (0.00 sec)
+
+mysql> SELECT * FROM resident;
++--------+-----------+--------------+--------+------+-----------+------------------+
+| Name   | Address   | Aadharno     | Gender | Age  | Mobile    | EmailID          |
++--------+-----------+--------------+--------+------+-----------+------------------+
+| Amit   | Mumbai    | AADHAR100001 | Male   |   30 | 987654321 | amit@gmail.com   |
+| Priya  | Delhi     | AADHAR100002 | Female |   28 | 912345678 | priya@gmail.com  |
+| Rahul  | Bangalore | AADHAR100003 | Male   |   35 | 998877665 | rahul@gmail.com  |
+| Sneha  | Hyderabad | AADHAR100004 | Female |   26 | 987123456 | sneha@gmail.com  |
+| Vikram | Chennai   | AADHAR100005 | Male   |   40 | 976543210 | vikram@gmail.com |
+| Anjali | Pune      | AADHAR100006 | Female |   33 | 965432109 | anjali@gmail.com |
+| Karan  | Kolkata   | AADHAR100007 | Male   |   38 | 954321098 | karan@gmail.com  |
+| Neha   | Jaipur    | AADHAR100008 | Female |   29 | 943210987 | neha@gmail.com   |
+| Rohit  | Ahmedabad | AADHAR100009 | Male   |   31 | 932109876 | rohit@gmail.com  |
+| Pooja  | Lucknow   | AADHAR100010 | Female |   27 | 921098765 | pooja@gmail.com  |
++--------+-----------+--------------+--------+------+-----------+------------------+
+10 rows in set (0.00 sec)
+
+mysql>
