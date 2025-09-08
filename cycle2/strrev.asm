@@ -6,9 +6,9 @@ section .data
     msg2_len equ $-msg2
 
 section .bss
-    str1 resb 100      ; input buffer
-    rev  resb 100      ; reversed string buffer
-    len  resd 1        ; store input length
+    str1 resb 100     
+    rev  resb 100      
+    len  resd 1        
 
 section .text
     global _start
@@ -27,18 +27,17 @@ _start:
     mov ecx,str1
     mov edx,100
     int 0x80
-    mov [len],eax          ; save length
+    mov [len],eax         
     mov ecx,eax
     dec ecx
-    mov byte[str1+ecx],0   ; replace newline with null terminator
-
+    mov byte[str1+ecx],0   
     ; Setup pointers for reversing
-    mov esi,str1           ; start of input
-    mov edi,rev            ; start of reversed buffer
+    mov esi,str1          
+    mov edi,rev            
     mov eax,[len]
-    dec eax                ; exclude newline
-    dec eax                ; exclude null
-    mov ebx,eax            ; length-2 (index for last char)
+    dec eax             
+    dec eax             
+    mov ebx,eax           
 
 reverse_loop:
     cmp ebx,-1
@@ -51,7 +50,7 @@ reverse_loop:
     jmp reverse_loop
 
 reverse_done:
-    mov byte[edi],0        ; null terminate reversed string
+    mov byte[edi],0        
 
     ; Print "Reversed string: "
     mov eax,4

@@ -28,7 +28,7 @@ _start:
     int 0x80
     mov [len],eax
     dec eax
-    mov byte[str1+eax],0    ; replace newline with null terminator
+    mov byte[str1+eax],0    
 
     ; Toggle loop
     mov esi,str1
@@ -38,22 +38,20 @@ toggle_loop:
     cmp al,0
     je toggle_done
 
-    ; If 'a' <= al <= 'z', convert to uppercase
     cmp al,'a'
     jl check_upper
     cmp al,'z'
     jg check_upper
-    sub al,32               ; 'a'→'A'
+    sub al,32               
     mov [esi],al
     jmp next_char
 
 check_upper:
-    ; If 'A' <= al <= 'Z', convert to lowercase
     cmp al,'A'
     jl next_char
     cmp al,'Z'
     jg next_char
-    add al,32               ; 'A'→'a'
+    add al,32              
     mov [esi],al
 
 next_char:

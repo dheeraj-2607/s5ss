@@ -36,7 +36,7 @@ _start:
     int 0x80
     mov [mainlen],eax
     dec eax
-    mov byte[mainstr+eax],0     ; replace newline with null
+    mov byte[mainstr+eax],0    
 
     ; Prompt for substring
     mov eax,4
@@ -53,27 +53,27 @@ _start:
     int 0x80
     mov [sublen],eax
     dec eax
-    mov byte[substr+eax],0      ; replace newline with null
+    mov byte[substr+eax],0      
 
     ; Initialize pointers
-    mov esi,mainstr             ; pointer into main string
+    mov esi,mainstr            
 
 outer_loop:
     mov al,[esi]
     cmp al,0
-    je not_found                ; reached end of main string
+    je not_found                
 
     ; try to match substring starting here
     mov edi,substr
     mov ebx,esi
 
 inner_loop:
-    mov al,[ebx]                ; char from main string
-    mov dl,[edi]                ; char from substring
+    mov al,[ebx]                
+    mov dl,[edi]                
     cmp dl,0
-    je found                    ; reached end of substring -> success
+    je found                    
     cmp al,0
-    je not_found                ; main ended early
+    je not_found             
     cmp al,dl
     jne no_match
     inc ebx
