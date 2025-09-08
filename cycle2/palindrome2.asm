@@ -2,11 +2,11 @@ section .data
     msg1 db "Enter a string: ",0xa
     msg1_len equ $-msg1
 
-    palindrome_msg db "Palindrome",0xa
-    palindrome_len equ $-palindrome_msg
+    msg2 db "Palindrome",0xa
+    msg2_len equ $-msg2
 
-    not_palindrome_msg db "Not Palindrome",0xa
-    not_palindrome_len equ $-not_palindrome_msg
+    msg3 db "Not Palindrome",0xa
+    msg3_len equ $-msg3
 
 section .bss
     str1 resb 100
@@ -74,8 +74,8 @@ is_palindrome:
     ; Print "Palindrome"
     mov eax,4
     mov ebx,1
-    mov ecx,palindrome_msg
-    mov edx,palindrome_len
+    mov ecx,msg2
+    mov edx,msg2_len
     int 0x80
     jmp exit
 
@@ -83,8 +83,8 @@ not_palindrome:
     ; Print "Not Palindrome"
     mov eax,4
     mov ebx,1
-    mov ecx,not_palindrome_msg
-    mov edx,not_palindrome_len
+    mov ecx,msg3
+    mov edx,msg3_len
     int 0x80
 
 exit:

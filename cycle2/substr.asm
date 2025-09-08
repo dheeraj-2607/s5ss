@@ -5,11 +5,11 @@ section .data
     msg2 db "Enter substring: ",0xa
     msg2_len equ $-msg2
 
-    found_msg db "Found",0xa
-    found_len equ $-found_msg
+    msg3 db "Found",0xa
+    msg3_len equ $-msg3
 
-    notfound_msg db "Not Found",0xa
-    notfound_len equ $-notfound_msg
+    msg4 db "Not Found",0xa
+    msg4_len equ $-msg4
 
 section .bss
     mainstr resb 200
@@ -87,16 +87,16 @@ no_match:
 found:
     mov eax,4
     mov ebx,1
-    mov ecx,found_msg
-    mov edx,found_len
+    mov ecx,msg3
+    mov edx,msg3_len
     int 0x80
     jmp exit
 
 not_found:
     mov eax,4
     mov ebx,1
-    mov ecx,notfound_msg
-    mov edx,notfound_len
+    mov ecx,msg4
+    mov edx,msg4_len
     int 0x80
 
 exit:
