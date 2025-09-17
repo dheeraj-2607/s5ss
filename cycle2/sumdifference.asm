@@ -1,8 +1,8 @@
 section .data
     msg1 db "Enter first number: ",0xa
     msg2 db "Enter second number: ",0xa
-    sum_msg db "Sum = ",0
-    diff_msg db "Difference = ",0
+    msg3 db "Sum = ",0
+    msg4 db "Difference = ",0
     newline db 0xa
 
 section .bss
@@ -55,7 +55,7 @@ _start:
 
     mov eax,4
     mov ebx,1
-    mov ecx,sum_msg
+    mov ecx,msg3
     mov edx,6
     int 0x80
 
@@ -74,7 +74,7 @@ _start:
 
     mov eax,4
     mov ebx,1
-    mov ecx,diff_msg
+    mov ecx,msg4
     mov edx,13
     int 0x80
 
@@ -123,7 +123,7 @@ print_int:
     mov ebx,10
 .repeat:
     xor edx,edx
-    div ebx          ; eax/=10, remainder=edx
+    div ebx          
     add dl,'0'
     dec edi
     mov [edi],dl
@@ -132,6 +132,7 @@ print_int:
     mov eax,4
     mov ebx,1
     mov ecx,edi
-    mov edx,result+12-edi
+    mov edx, result+12
+    sub edx, edi
     int 0x80
     ret

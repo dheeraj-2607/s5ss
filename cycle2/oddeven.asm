@@ -1,7 +1,7 @@
 section .data
     msg1 db "Enter a number: ",0xa
-    even_msg db "The number is Even",0xa
-    odd_msg  db "The number is Odd",0xa
+    msg2 db "The number is Even",0xa
+    msg3  db "The number is Odd",0xa
 
 section .bss
     num resb 10        
@@ -47,7 +47,7 @@ _start:
 .print_odd:
     mov eax,4
     mov ebx,1
-    mov ecx,odd_msg
+    mov ecx,msg3
     mov edx,18
     int 0x80
     jmp .exit
@@ -55,7 +55,7 @@ _start:
 .print_even:
     mov eax,4
     mov ebx,1
-    mov ecx,even_msg
+    mov ecx,msg2
     mov edx,20
     int 0x80
 

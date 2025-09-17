@@ -106,6 +106,7 @@ print_int:
     mov eax,4
     mov ebx,1
     mov ecx,edi
-    mov edx,buffer+32-edi
+    mov edx, buffer+32
+    sub edx, edi    
     int 0x80
     ret
