@@ -28,7 +28,7 @@ _start:
 
     
     mov esi,num
-    xor ecx,ecx              
+    xor edx,edx              ; edx will hold the sum
 .skip_sign:
     mov al,[esi]
     cmp al,'-'
@@ -40,21 +40,21 @@ _start:
     cmp al,0
     je .done_sum
 
-    sub al,'0'                
-    add ecx,eax              
+    sub al,'0'               
+    add edx,eax              
 
     inc esi
     jmp .digit_loop
 
 .done_sum:
-    
+    mov eax,edx              ; move sum to eax (save sum)
+    push eax                 ; save sum on stack
     mov eax,4
     mov ebx,1
     mov ecx,res_msg
     mov edx,17
     int 0x80
-
-    mov eax,ecx
+    pop eax                  ; restore sum to eax
     call print_int
 
     mov eax,4
@@ -93,6 +93,7 @@ print_int:
     mov eax,4
     mov ebx,1
     mov ecx,edi
-    mov edx,buffer+32-edi
+    mov edx,buffer+32
+    sub edx,edi
     int 0x80
     ret
