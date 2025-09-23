@@ -1,0 +1,15 @@
+; Simple program to add two numbers
+START:  ORG 1000
+        MOV A, 5
+        MOV B, 10
+        
+LOOP:   ADD A, B
+        SUB B, 1
+        JNZ LOOP
+        
+        STORE RESULT, A
+        HLT
+
+; Data section
+RESULT: DS 1
+        END START
