@@ -1,0 +1,40 @@
+HAND ASSEMBLY OUTPUT
+====================
+
+OBJECT CODE RECORDS
+===================
+
+HPROGRAM00000000001C
+T00000003000000
+T000003180100000100000200000300000800090B001B100000000000
+E000000
+
+
+SOURCE CODE LISTING
+===================
+Addr    Line#  Source Code
+-----   -----  ----------------------------------
+0       1     ; Simple program to add two numbers
+3       2     START:  ORG 1000
+3       3             MOV A, 5
+6       4             MOV B, 10
+        5             
+9       6     LOOP:   ADD A, B
+12      7             SUB B, 1
+15      8             JNZ LOOP
+        9             
+18      10            STORE RESULT, A
+21      11            HLT
+        12    
+24      13    ; Data section
+27      14    RESULT: DS 1
+28      15            END START
+
+
+SYMBOL TABLE
+============
+Label               Address
+----------------    ------
+START                0003
+LOOP                 0009
+RESULT               001B
